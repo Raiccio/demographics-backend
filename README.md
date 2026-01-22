@@ -35,6 +35,7 @@ Purpose: interface to clients
 Implementation: ***FastAPI***
 
 Responsibilities:
+
 • expose resources (/states, /states?name=Texas)
 • validate incoming requests
 • call Design Layer to get processed data
@@ -48,6 +49,7 @@ Purpose: business logic / processing
 Implementation : ***Python***
 
 Responsibilities:
+
 • On-demand: handle API requests, transform them into DB queries, aggregate or filter data
 • Background job: periodic fetch of ESRI GIS data, aggregation by state, storage in DB
 • Decouples client-facing logic from data storage details
@@ -60,6 +62,7 @@ Purpose: persistent data storage
 Implementation: ***SQLite database***
 
 Responsibilities:
+
 • store aggregated demographic data
 • expose only structured queries to DL
 
