@@ -124,11 +124,12 @@ Test it prints something → works
 6️⃣ Iterate
 
 Once the full path works (fetch → aggregate → store → serve), add:
-
-proper exception handling
-docstrings
-logging
-requirements justification in your documentation
+<ul>
+<li>proper exception handling</li>
+<li>docstrings</li>
+<li>logging</li>
+<li>requirements justification in your documentation</li>
+</ul>
 
 
 
