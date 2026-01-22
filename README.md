@@ -35,12 +35,11 @@ Purpose: interface to clients
 Implementation: ***FastAPI***
 
 Responsibilities:
-
-• expose resources (/states, /states?name=Texas)
-
-• validate incoming requests
-
-• call Design Layer to get processed data
+<ul>
+  <li>expose resources (/states, /states?name=Texas)</li>
+  <li>validate incoming requests</li>
+  <li>call Design Layer to get processed data</li>
+</ul>
 
 Key point: purely stateless, no DB logic here
 
@@ -65,10 +64,10 @@ Purpose: persistent data storage
 Implementation: ***SQLite database***
 
 Responsibilities:
-
-• store aggregated demographic data
-
-• expose only structured queries to DL
+<ul>
+  <li>store aggregated demographic data</li>
+  <li>expose only structured queries to DL</li>
+</ul>
 
 Key point: no API, no business logic; DL is the only client
 
