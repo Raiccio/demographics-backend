@@ -96,11 +96,11 @@ Key point: no API, no business logic; DL is the only client
 
 
 2️⃣ Storage layer first (quick win)
-
-Create SQLite DB file demographics.db in data/
-Make table state_population(state_name TEXT PRIMARY KEY, population INT, updated_at DATETIME)
-Test inserting and querying manually in Python
-
+<ul>
+<li>Create SQLite DB file demographics.db in data/</li>
+<li>Make table state_population(state_name TEXT PRIMARY KEY, population INT, updated_at DATETIME)</li>
+<li>Test inserting and querying manually in Python</li>
+</ul>
 3️⃣ Service layer minimal
 
 Write a function that fetches ESRI JSON and aggregates population by state
