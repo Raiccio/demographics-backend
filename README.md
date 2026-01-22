@@ -27,25 +27,25 @@ REST API = HTTP-based interface for manipulating resources
 
 Periodic execution is implemented using an application-level scheduler (APScheduler), avoiding OS-specific dependencies such as cron and ensuring cross-platform compatibility.
 
+## STRUCTURE
 
-
-**1️⃣ Presentation Layer**
+**1️⃣ Presentation Layer (PL)**
 
 Purpose: interface to clients
-Implementation: FastAPI REST endpoints
+Implementation: ***FastAPI***
 
 Responsibilities:
 • expose resources (/states, /states?name=Texas)
 • validate incoming requests
-• call Service Layer to get processed data
+• call Design Layer to get processed data
 
 Key point: purely stateless, no DB logic here
 
 
-**2️⃣ Service / Design Layer**
+**2️⃣ Design Layer (DL)**
 
 Purpose: business logic / processing
-Implementation : Python
+Implementation : ***Python***
 
 Responsibilities:
 • On-demand: handle API requests, transform them into DB queries, aggregate or filter data
@@ -54,10 +54,10 @@ Responsibilities:
 
 Key point: this is the most complex layer, combines request handling and passive background processing
 
-**3️⃣ Storage Layer**
+**3️⃣ Storage Layer (SL)**
 
 Purpose: persistent data storage
-Implementation: SQLite database
+Implementation: ***SQLite database***
 
 Responsibilities:
 • store aggregated demographic data
@@ -73,7 +73,7 @@ Key point: no API, no business logic; DL is the only client
                 |
                 v
       +--------------------+
-      |  Business Layer      |
+      |  Design Layer      |
       |  (Service / Logic) |
       |  - API requests    |
       |  - Background job  |
