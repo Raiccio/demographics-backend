@@ -51,10 +51,11 @@ Purpose: business logic / processing
 Implementation : ***Python***
 
 Responsibilities:
-
-• On-demand: handle API requests, transform them into DB queries, aggregate or filter data
-• Background job: periodic fetch of ESRI GIS data, aggregation by state, storage in DB
-• Decouples client-facing logic from data storage details
+<ul>
+  <li>On-demand: handle API requests, transform them into DB queries, aggregate or filter data</li>
+  <li>Background job: periodic fetch of ESRI GIS data, aggregation by state, storage in DB</li>
+  <li>Decouples client-facing logic from data storage details</li>
+</ul>
 
 Key point: this is the most complex layer, combines request handling and passive background processing
 
