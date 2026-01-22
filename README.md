@@ -29,7 +29,7 @@ Periodic execution is implemented using an application-level scheduler (APSchedu
 
 
 
-**1️⃣ Presentation / API Layer**
+**1️⃣ Presentation Layer**
 
 Purpose: interface to clients
 Implementation: FastAPI REST endpoints
@@ -42,7 +42,7 @@ Responsibilities:
 Key point: purely stateless, no DB logic here
 
 
-**2️⃣ Business / Logic Layer**
+**2️⃣ Service / Design Layer**
 
 Purpose: business logic / processing
 Implementation : Python
@@ -54,7 +54,7 @@ Responsibilities:
 
 Key point: this is the most complex layer, combines request handling and passive background processing
 
-**3️⃣ Data / Storage Layer**
+**3️⃣ Storage Layer**
 
 Purpose: persistent data storage
 Implementation: SQLite database
@@ -73,7 +73,7 @@ Key point: no API, no business logic; DL is the only client
                 |
                 v
       +--------------------+
-      |  Design Layer      |
+      |  Business Layer      |
       |  (Service / Logic) |
       |  - API requests    |
       |  - Background job  |
