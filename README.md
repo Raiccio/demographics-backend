@@ -37,7 +37,9 @@ Implementation: ***FastAPI***
 Responsibilities:
 
 • expose resources (/states, /states?name=Texas)
+
 • validate incoming requests
+
 • call Design Layer to get processed data
 
 Key point: purely stateless, no DB logic here
@@ -51,7 +53,9 @@ Implementation : ***Python***
 Responsibilities:
 
 • On-demand: handle API requests, transform them into DB queries, aggregate or filter data
+
 • Background job: periodic fetch of ESRI GIS data, aggregation by state, storage in DB
+
 • Decouples client-facing logic from data storage details
 
 Key point: this is the most complex layer, combines request handling and passive background processing
@@ -64,6 +68,7 @@ Implementation: ***SQLite database***
 Responsibilities:
 
 • store aggregated demographic data
+
 • expose only structured queries to DL
 
 Key point: no API, no business logic; DL is the only client
