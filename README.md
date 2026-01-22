@@ -29,7 +29,7 @@ Periodic execution is implemented using an application-level scheduler (APSchedu
 
 ## STRUCTURE
 
-**1️⃣ Presentation Layer (PL)**
+**1️⃣ Presentation / API Layer (AL)**
 
 Purpose: interface to clients
 Implementation: ***FastAPI***
@@ -44,7 +44,7 @@ Responsibilities:
 Key point: purely stateless, no DB logic here
 
 
-**2️⃣ Design Layer (DL)**
+**2️⃣ Design / Services Layer (DL)**
 
 Purpose: business logic / processing
 Implementation : ***Python***
@@ -58,7 +58,7 @@ Responsibilities:
 
 Key point: this is the most complex layer, combines request handling and passive background processing
 
-**3️⃣ Storage Layer (SL)**
+**3️⃣ Data / Storage Layer (SL)**
 
 Purpose: persistent data storage
 Implementation: ***SQLite database***
@@ -92,8 +92,43 @@ Key point: no API, no business logic; DL is the only client
       +--------------------+
 
 
+============
 
 
+2️⃣ Storage layer first (quick win)
+
+Create SQLite DB file demographics.db in data/
+Make table state_population(state_name TEXT PRIMARY KEY, population INT, updated_at DATETIME)
+Test inserting and querying manually in Python
+
+3️⃣ Service layer minimal
+
+Write a function that fetches ESRI JSON and aggregates population by state
+Print the result → end-to-end works
+Later: write to SQLite
+
+4️⃣ API layer minimal
+
+FastAPI app exposing:
+
+    GET /states → returns all states
+    GET /states?name=Texas → returns that state
+
+Test with curl or browser
+
+5️⃣ Background job
+
+Add APScheduler job that calls your ESRI fetch + DB write every X seconds/minutes
+Test it prints something → works
+
+6️⃣ Iterate
+
+Once the full path works (fetch → aggregate → store → serve), add:
+
+proper exception handling
+docstrings
+logging
+requirements justification in your documentation
 
 
 
