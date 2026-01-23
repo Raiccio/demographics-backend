@@ -3,3 +3,5 @@ pydantic<2
 uvicorn
 httpx
 apscheduler
+pytest
+pytest-asyncio
