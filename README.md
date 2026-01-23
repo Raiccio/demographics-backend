@@ -131,7 +131,14 @@ Once the full path works (fetch → aggregate → store → serve), add:
 <li>requirements justification in your documentation</li>
 </ul>
 
+====================
 
+Structure:
+- app/api/ - FastAPI presentation layer (REST endpoints)
+- app/services/ - Business logic layer (ESRI data processing)
+- app/storage/ - SQLite data storage layer
+- data/ - Database files directory
+- docs/ - Documentation
 
 
 
