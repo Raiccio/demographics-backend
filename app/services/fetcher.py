@@ -3,6 +3,7 @@ import json
 import os
 from datetime import datetime
 from typing import Dict, Any, List
+import pytest
 
 class ArcGISFeatureFetcher:
     def __init__(self, feature_server_url: str):

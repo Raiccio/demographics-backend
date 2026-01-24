@@ -27,3 +27,5 @@ async def test_fetch_aggregated_by_state():
     
     print(aggregated_data[0])
     
+if __name__ == "__main__":
+    pytest.main([__file__])
