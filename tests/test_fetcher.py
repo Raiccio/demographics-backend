@@ -1,9 +1,10 @@
 import pytest
 from app.services.fetcher import ArcGISFeatureFetcher
+from app.config import Config
 
 @pytest.mark.asyncio
 async def test_fetch_demographic_data():
-    fetcher = ArcGISFeatureFetcher("https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Census_Counties/FeatureServer")
+    fetcher = ArcGISFeatureFetcher(Config.DEFAULT_FEATURE_SERVER_URL)
     
     print("Fetching demographic data...")
     data = await fetcher.fetch_demographic_data()
@@ -19,7 +20,7 @@ async def test_fetch_demographic_data():
     
 @pytest.mark.asyncio
 async def test_fetch_aggregated_by_state():
-    fetcher = ArcGISFeatureFetcher("https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Census_Counties/FeatureServer")
+    fetcher = ArcGISFeatureFetcher(Config.DEFAULT_FEATURE_SERVER_URL)
     
     print("Fetching population data aggregated by state...")
     aggregated_data = await fetcher.fetch_aggregated_by_state()
@@ -27,5 +28,6 @@ async def test_fetch_aggregated_by_state():
     
     print(aggregated_data[0])
     
+
 if __name__ == "__main__":
     pytest.main([__file__])

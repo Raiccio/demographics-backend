@@ -1,24 +1,26 @@
-import os
 import json
 import sqlite3
 import shutil
 import re
 from datetime import datetime
-from typing import List, Dict, Optional, Union
+from typing import List, Dict, Optional
 from pathlib import Path
-
+from app.config import Config
 
 class DataProcessor:
-    def __init__(self, data_dir: str = "./data", storage_dir: str = "./app/storage"):
+    def __init__(self, data_dir: str = Config.DATA_DIR, storage_dir: str = Config.STORAGE_DIR):
         self.data_dir = Path(data_dir)
         self.storage_dir = Path(storage_dir)
         self.storage_dir.mkdir(parents=True, exist_ok=True)
+        
+        self.log_processing(f"Data directory: {self.data_dir}")
+        self.log_processing(f"Database directory: {self.storage_dir}")
         
         # Create subdirectories
         (self.data_dir / "processed").mkdir(exist_ok=True)
         (self.data_dir / "error").mkdir(exist_ok=True)
         
-        self.db_path = self.storage_dir / "demographics.db"
+        self.db_path = self.storage_dir / Config.DB_NAME
         self._init_database()
     
     def _init_database(self) -> None:
@@ -33,6 +35,7 @@ class DataProcessor:
                 )
             """)
             conn.commit()
+        self.log_processing(f"Database: {self.storage_dir / self.db_path.name}")
     
     def find_demographic_files(self) -> List[str]:
         """Find all demographic_data_*.json files in data directory."""

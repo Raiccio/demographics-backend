@@ -3,11 +3,15 @@ import json
 import os
 from datetime import datetime
 from typing import Dict, Any, List
-import pytest
+from app.config import Config 
+
 
 class ArcGISFeatureFetcher:
-    def __init__(self, feature_server_url: str):
+    def __init__(self, feature_server_url: str = Config.DEFAULT_FEATURE_SERVER_URL):
+        if Config.BASE_ARCGIS_API_URL not in str(feature_server_url):
+            feature_server_url = Config.DEFAULT_FEATURE_SERVER_URL
         self.feature_server_url = feature_server_url
+        self.console_log(f"Feature server url initialized to {self.feature_server_url}")
     
     async def fetch_demographic_data(self) -> List[Dict[str, Any]]:
         """Fetch all demographic data from ArcGIS FeatureServer with pagination."""
@@ -26,7 +30,7 @@ class ArcGISFeatureFetcher:
                     'resultRecordCount': record_count
                 }
                 
-                response = await client.get(f"{self.feature_server_url}/0/query", params=params)
+                response = await client.get(f"{self.feature_server_url}/query", params=params)
                 response.raise_for_status()
                 
                 data = response.json()
@@ -76,13 +80,19 @@ class ArcGISFeatureFetcher:
         
         return aggregated_data
     
+    def console_log(self, message: str) -> None:
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        log_entry = f"[{timestamp}] {message}\n"
+
+        print(log_entry.strip())  # Also print to console
+
     def _save_data_to_file(self, data: List[Dict[str, Any]]) -> None:
         """Save data to JSON file in ./data directory with timestamp."""
-        os.makedirs('./data', exist_ok=True)
+        os.makedirs(Config.DATA_DIR, exist_ok=True)
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         filename = f'./data/demographic_data_{timestamp}.json'
         
         with open(filename, 'w') as f:
             json.dump(data, f, indent=2)
         
-        print(f"Saved {len(data)} records to {filename}")
+        self.console_log(f"Saved {len(data)} records to {filename}")

@@ -1,12 +1,10 @@
 import pytest
 import json
 import tempfile
-import os
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 from unittest.mock import patch, MagicMock
-
 from app.services.data_processor import DataProcessor
 
 
