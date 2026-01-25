@@ -90,9 +90,13 @@ class ArcGISFeatureFetcher:
         """Save data to JSON file in ./data directory with timestamp."""
         os.makedirs(Config.DATA_DIR, exist_ok=True)
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f'./data/demographic_data_{timestamp}.json'
+        filename = f'{Config.DATA_DIR}/demographic_data_{timestamp}.json'
         
-        with open(filename, 'w') as f:
-            json.dump(data, f, indent=2)
-        
-        self.console_log(f"Saved {len(data)} records to {filename}")
+        if data:
+            with open(filename, 'w') as f:
+                json.dump(data, f, indent=2)
+            
+            self.console_log(f"Saved {len(data)} records to {filename}")
+        else:
+            self.console_log(f"{len(data)} records fetched")
+

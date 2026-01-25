@@ -10,6 +10,4 @@ demographics-backend.code-workspace
 data/
 app/storage/*.log
 app/storage/*.db
-data/
-app/storage/*.log
-app/storage/*.db
+README.md.old

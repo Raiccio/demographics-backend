@@ -7,9 +7,9 @@ class Config:
     BASE_ARCGIS_API_URL  = "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/"
     DEFAULT_FEATURE_SERVER_URL  = f"{BASE_ARCGIS_API_URL}USA_Census_Counties/FeatureServer/0"
     
-    # Scheduler Configuration
-    SCHEDULER_FETCH_INTERVAL = 1800 # 30 minutes
-    SCHEDULER_PROCESS_INTERVAL = 3600  # 1 hour
+    # Scheduler Configuration - Daily intervals for 2-year-old census data
+    SCHEDULER_FETCH_INTERVAL = 86400  # 24 hours (1 day)
+    SCHEDULER_PROCESS_INTERVAL = 86400  # 24 hours (1 day)
     SCHEDULER_ENABLED = 'true'
     
     # Data Directories
